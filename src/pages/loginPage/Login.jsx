@@ -1,13 +1,14 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../Authprovider/AuthProvider";
-import axios from "axios";
 import { Helmet } from "react-helmet";
+import { FaRegEyeSlash, FaRegEye, FaGoogle} from "react-icons/fa6";
 
 const Login = () => {
-    const {userLogin} =useContext(AuthContext);
+    const {userLogin, googleSignUp} =useContext(AuthContext);
     const location =useLocation();
     const navigate =useNavigate();
+    const [showPass, setShowPass] =useState(false);
 
     const handelLogin=(e)=>{
         e.preventDefault();
@@ -18,18 +19,19 @@ const Login = () => {
         .then(result=>{
             const loginuser=result.user;
             console.log(loginuser);
-            const user={email};
-           
-            axios.post('http://localhost:5000/jwt', user, {
-                withCredentials:true
-            })
-            .then(data=>{
-                console.log(data.data);
-                if(data.data.success){
-                     navigate(location?.state ? location.state : "/");
-                }
-            })
-
+            navigate(location?.state ? location.state : "/");
+        })
+        .catch(error=>{
+            console.log(error);
+        })
+    }
+    const googlelogin=()=>{
+        googleSignUp()
+        .then(result=>{
+            const user =result.user;
+            console.log(user);
+            navigate(location?.state ? location.state : "/");
+            
         })
         .catch(error=>{
             console.log(error);
@@ -40,32 +42,43 @@ const Login = () => {
             <Helmet>
             <title>Job Box | login your account</title>
             </Helmet>
-            <div className="bg-base-200">
+            <div className="bg-[#F5F7FC] py-10">
                 <div className="flex justify-center items-center gap-5 flex-col lg:flex-row">
                     
-                    <div className="shadow-2xl bg-base-100 rounded-lg py-16">
+                    <div className="shadow-2xl bg-base-100 rounded-lg border-t-4 border-b-4 border-[#007456] py-16">
                     <h1 className="text-4xl font-bold text-center">Login</h1>
                         <form onSubmit={handelLogin} className="card-body">
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Email</span>
                                 </label>
-                                <input type="email" name="email" placeholder="email" className="input input-bordered" required />
+                                <input type="email" name="email" placeholder="email" className="input input-bordered focus:border-[#007456] focus:outline-none" required />
                             </div>
-                            <div className="form-control">
+                            <div className="form-control relative">
                                 <label className="label">
                                     <span className="label-text">Password</span>
                                 </label>
-                                <input type="password" name="password" placeholder="password" className="input input-bordered" required />
+                                <input type={showPass ? 'text' : 'password'} name="password" placeholder="password" className="input input-bordered focus:border-[#007456] focus:outline-none" required />
+                                <span onClick={()=>setShowPass(!showPass)} className="cursor-pointer absolute bottom-12 right-2">{
+                                    showPass ?
+                                    <FaRegEye></FaRegEye>
+                                    :
+                                    <FaRegEyeSlash></FaRegEyeSlash>
+                                    
+                                }</span>
                                 <label className="label">
                                     <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                                 </label>
                             </div>
                             <div className="form-control mt-6">
-                                <button className="btn text-white bg-[#FF3811] hover:bg-[#FF3811]">Login</button>
+                                <button className="btn text-white bg-[#007456] hover:bg-[#FF3811]">Login</button>
                             </div>
                         </form>
-                        <p className="text-center">Have an account? <Link className="text-[#FF3811]" to="/signup">Sign Up</Link></p>
+                        <div className="text-center pb-8 space-y-3">
+                            <p className="text-lg">Or Continue with</p>
+                            <i onClick={googlelogin} className="flex justify-center cursor-pointer"><FaGoogle className="bg-[#007456] text-white rounded-full p-4 w-16 h-16 hover:bg-[#EA4335]"></FaGoogle></i>
+                        </div>
+                        <p className="text-center">Have an account? <Link className="text-[#007456]" to="/signup">Sign Up</Link></p>
                     </div>
                 </div>
             </div>

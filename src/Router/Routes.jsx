@@ -30,7 +30,7 @@ const router =createBrowserRouter([
             },
             {
                 path:"/addjobs",
-                element:<AddJobs></AddJobs>
+                element:<PrivetRout><AddJobs></AddJobs></PrivetRout>
             },
             {
                 path:"/login",
@@ -51,7 +51,7 @@ const router =createBrowserRouter([
             },
             {
                 path:"/bidrequest",
-                element:<BidReq></BidReq>
+                element:<PrivetRout><BidReq></BidReq></PrivetRout>
             }
         ]
       }

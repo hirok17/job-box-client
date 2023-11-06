@@ -1,18 +1,24 @@
-import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../Authprovider/AuthProvider";
 import { updateProfile } from "firebase/auth";
 import { Helmet } from "react-helmet";
+import toast, { Toaster } from 'react-hot-toast';
+import { FaRegEyeSlash, FaRegEye, FaGoogle} from "react-icons/fa6";
 
 const SignIn = () => {
-    const {createUser}=useContext(AuthContext);
+    const {createUser, googleSignUp}=useContext(AuthContext);
+    const navigate =useNavigate();
+    const [showPass, setShowPass] =useState(false);
+    const notify = () => toast('Here is your toast.');
     const heandelSignUp=(e)=>{
         e.preventDefault();
         const name =e.target.name.value;
         const email=e.target.email.value;
+        const photo=e.target.photo.value;
         const password =e.target.password.value;
         
-        const signUpUser={name, email, password};
+        const signUpUser={name, email, photo, password};
         console.log(signUpUser);
 
         createUser(email, password)
@@ -21,7 +27,9 @@ const SignIn = () => {
             console.log(signInuser);
 
             updateProfile(result.user, {
-                displayName:name
+                displayName:name,
+                photoURL:photo
+
             })
             .then(()=>{
                 console.log('profile update');
@@ -29,7 +37,21 @@ const SignIn = () => {
             .catch(error=>{
                 console.log(error);
             })
-            alert ('successful sign up');
+            notify();
+            <Toaster />
+             navigate('/');
+        })
+        .catch(error=>{
+            console.log(error);
+        })
+    }
+    const googlelogin=()=>{
+        googleSignUp()
+        .then(result=>{
+            const user =result.user;
+            console.log(user);
+            navigate('/');
+            
         })
         .catch(error=>{
             console.log(error);
@@ -64,11 +86,20 @@ const SignIn = () => {
                                 </label>
                                 <input type="text" name="photo" placeholder="photo url" className="input input-bordered focus:border-[#007456] focus:outline-none" required />
                             </div>
-                            <div className="form-control">
+                            <div className="form-control relative">
                                 <label className="label">
                                     <span className="label-text">Password</span>
                                 </label>
-                                <input type="password" name="password" placeholder="password" className="input input-bordered focus:border-[#007456] focus:outline-none" required />
+                              
+                               <input type={showPass ? 'text' : 'password'} name="password" placeholder="password" className="input input-bordered focus:border-[#007456] focus:outline-none" required />
+                                <span onClick={()=>setShowPass(!showPass)} className="cursor-pointer absolute bottom-12 right-2">{
+                                    showPass ?
+                                    <FaRegEye></FaRegEye>
+                                    :
+                                    <FaRegEyeSlash></FaRegEyeSlash>
+                                    
+                                }</span>
+                            
                                 <label className="label">
                                     <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                                 </label>
@@ -77,7 +108,12 @@ const SignIn = () => {
                                 <button className="btn text-white bg-[#007456] hover:bg-[#007456]">Sign Up</button>
                             </div>
                         </form>
-                        <p className="text-center pb-4">Already have an account? <Link className="text-[#FF3811]" to="/login">Login</Link></p>
+                       
+                        <div className="text-center space-y-3">
+                            <p className="text-lg">Or Continue with</p>
+                            <i onClick={googlelogin} className="flex justify-center cursor-pointer"><FaGoogle className="bg-[#007456] text-white rounded-full p-4 w-16 h-16 hover:bg-[#EA4335]"></FaGoogle></i>
+                        </div>
+                        <p className="text-center pb-8 mt-3">Already have an account? <Link className="text-[#007456]" to="/login">Login</Link></p>
                     </div>
                 </div>
             </div>
