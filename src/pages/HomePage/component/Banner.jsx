@@ -1,6 +1,7 @@
 import banner from '../../../assets/banner.png';
 import banner2 from '../../../assets/image2.webp';
 import banner3 from '../../../assets/img3.png';
+import banner4 from '../../../assets/image4.webp';
 import bg from '../../../assets/bg.png';
 
 const Banner = () => {
@@ -13,6 +14,7 @@ const Banner = () => {
                         <img className='absolute right-0' src={banner2} alt="" />
                         <img className='absolute top-0 left-0' src={banner2} alt="" />
                         <img className='absolute bottom-0 left-0' src={banner3} alt="" />
+                        <img className='absolute top-[50%] animate-ping' src={banner4} alt="" />
                     </div>
                     <div className='space-y-5'>
                         <h2 className="text-lg font-semibold ">GET STARTED TODAY</h2>

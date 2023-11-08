@@ -11,11 +11,13 @@ import Myjobs from "../pages/AboutPage/Myjobs/Myjobs";
 import MyBids from "../pages/mybids/MyBids";
 import BidReq from "../pages/bidreq/BidReq";
 import Details from "../pages/jobedetails/Details";
+import ErrorPage from "../Root/ErrorPage";
 
 const router =createBrowserRouter([
     {
         path: "/",
         element:<Root></Root>,
+        errorElement:<ErrorPage></ErrorPage>,
         children:[
             {
                 path:"/",

@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import axios from 'axios';
 import JobCart from './JobCart';
+import { useEffect } from 'react';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -55,6 +56,13 @@ export default function BasicTabs() {
       setCategoris(res.data);
     })
   },[])
+    useEffect(()=>{
+      axios.get('http://localhost:5000/jobs')
+      .then(res=>{
+        const filterData=res.data.filter(info=>info.category =='web-development');
+        setJobs(filterData);
+      })
+    },[])
   const handelCategory=(category)=>{
     axios.get(`http://localhost:5000/jobs/${category}`)
     .then(res=>{
