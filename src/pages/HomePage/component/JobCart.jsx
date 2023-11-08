@@ -1,6 +1,7 @@
+import { Link } from "react-router-dom";
 
 const JobCart = ({ job }) => {
-    const { title, featured_img, minimum, maximum, deadline, location, experience} = job;
+    const { _id, title, featured_img, minimum, maximum, deadline, location, experience} = job;
     return (
         <section className="w-full px-2 lg:px-0">
             <div className="flex justify-between gap-x-4 bg-base-100 shadow-xl py-4 px-3 rounded-lg border">
@@ -20,7 +21,7 @@ const JobCart = ({ job }) => {
                     
                 </div>
                 <div>
-                    <button className="btn text-white bg-[#007456] hover:bg-[#FF3811]">Bid Now</button>
+                    <Link to={`jobs/bid/${_id}`}><button className="btn text-white bg-[#007456] hover:bg-[#FF3811]">Bid Now</button></Link>
                 </div>
             </div>
         </section>

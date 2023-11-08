@@ -10,6 +10,7 @@ import AddJobs from "../pages/addjobs/AddJobs";
 import Myjobs from "../pages/AboutPage/Myjobs/Myjobs";
 import MyBids from "../pages/mybids/MyBids";
 import BidReq from "../pages/bidreq/BidReq";
+import Details from "../pages/jobedetails/Details";
 
 const router =createBrowserRouter([
     {
@@ -52,6 +53,11 @@ const router =createBrowserRouter([
             {
                 path:"/bidrequest",
                 element:<PrivetRout><BidReq></BidReq></PrivetRout>
+            },
+            {
+                path:"/jobs/bid/:id",
+                element:<Details></Details>,
+                loader:({params})=> fetch(`http://localhost:5000/jobs/bid/${params.id}`)
             }
         ]
       }
