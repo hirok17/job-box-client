@@ -1,6 +1,8 @@
 import { Helmet } from "react-helmet";
 import Banner from "./component/Banner";
 import BasicTabs from "./component/BasicTabs";
+import PostAJob from "./component/PostAJob";
+import Step from "./component/Step";
      
 const Home = () => {
     
@@ -11,6 +13,8 @@ const Home = () => {
             </Helmet>
             <Banner></Banner>
             <BasicTabs></BasicTabs>
+            <PostAJob></PostAJob>
+            <Step></Step>
         </div>
     );
 };
