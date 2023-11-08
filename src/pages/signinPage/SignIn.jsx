@@ -3,14 +3,13 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../Authprovider/AuthProvider";
 import { updateProfile } from "firebase/auth";
 import { Helmet } from "react-helmet";
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { FaRegEyeSlash, FaRegEye, FaGoogle} from "react-icons/fa6";
 
 const SignIn = () => {
     const {createUser, googleSignUp}=useContext(AuthContext);
     const navigate =useNavigate();
     const [showPass, setShowPass] =useState(false);
-    const notify = () => toast('Here is your toast.');
     const heandelSignUp=(e)=>{
         e.preventDefault();
         const name =e.target.name.value;
@@ -37,8 +36,7 @@ const SignIn = () => {
             .catch(error=>{
                 console.log(error);
             })
-            notify();
-            <Toaster />
+            toast.success('sign Up success');
              navigate('/');
         })
         .catch(error=>{

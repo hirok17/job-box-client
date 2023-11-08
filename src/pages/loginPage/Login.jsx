@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../Authprovider/AuthProvider";
 import { Helmet } from "react-helmet";
 import { FaRegEyeSlash, FaRegEye, FaGoogle} from "react-icons/fa6";
+import toast from "react-hot-toast";
 
 const Login = () => {
     const {userLogin, googleSignUp} =useContext(AuthContext);
@@ -19,10 +20,12 @@ const Login = () => {
         .then(result=>{
             const loginuser=result.user;
             console.log(loginuser);
+            toast.success('Login success');
             navigate(location?.state ? location.state : "/");
         })
         .catch(error=>{
             console.log(error);
+            toast.error('Invalid email or password');
         })
     }
     const googlelogin=()=>{
@@ -35,6 +38,7 @@ const Login = () => {
         })
         .catch(error=>{
             console.log(error);
+           
         })
     }
     return (
