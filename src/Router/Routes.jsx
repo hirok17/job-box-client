@@ -7,7 +7,7 @@ import Login from "../pages/loginPage/Login";
 import SignIn from "../pages/signinPage/SignIn";
 import PrivetRout from "./PrivetRout";
 import AddJobs from "../pages/addjobs/AddJobs";
-import Myjobs from "../pages/AboutPage/Myjobs/Myjobs";
+import Myjobs from "../pages/Myjobs/Myjobs";
 import MyBids from "../pages/mybids/MyBids";
 import BidReq from "../pages/bidreq/BidReq";
 import Details from "../pages/jobedetails/Details";
