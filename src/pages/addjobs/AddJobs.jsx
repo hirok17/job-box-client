@@ -3,6 +3,7 @@ import { AuthContext } from "../../Authprovider/AuthProvider";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 
 const AddJobs = () => {
@@ -42,6 +43,9 @@ const AddJobs = () => {
     };
     return (
         <section className="bg-[#F5F7FC] py-10 px-3">
+            <Helmet>
+            <title>Job Box | Add your job</title>
+            </Helmet>
             <h2 className="text-5xl font-bold text-center">Post a New Job </h2>
             <div className="max-w-[950px] mx-auto bg-white px-8 py-10 rounded-lg drop-shadow-sm mt-8 border-t-4 border-b-4 border-[#007456]">
                 <form onSubmit={hendelform}>

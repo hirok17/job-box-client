@@ -3,6 +3,7 @@ import { AuthContext } from "../../Authprovider/AuthProvider";
 import axios from "axios";
 import JobeTable from "./JobeTable";
 import Swal from 'sweetalert2';
+import { Helmet } from "react-helmet";
 
 const Myjobs = () => {
     const { user } = useContext(AuthContext);
@@ -46,6 +47,9 @@ const Myjobs = () => {
     }
     return (
         <section>
+            <Helmet>
+            <title>Job Box |see your job</title>
+            </Helmet>
             <div className="bg-[url('https://i.ibb.co/9408VN5/Banner.png')] text-center py-16">
                 <h2 className="text-white text-4xl font-bold">Find Your Dream Jobs</h2>
             </div>

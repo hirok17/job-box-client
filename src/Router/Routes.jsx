@@ -12,6 +12,7 @@ import MyBids from "../pages/mybids/MyBids";
 import BidReq from "../pages/bidreq/BidReq";
 import Details from "../pages/jobedetails/Details";
 import ErrorPage from "../Root/ErrorPage";
+import JobeUpdate from "../pages/jobeupdate/JobeUpdate";
 
 const router =createBrowserRouter([
     {
@@ -60,6 +61,11 @@ const router =createBrowserRouter([
                 path:"/jobs/bid/:id",
                 element:<Details></Details>,
                 loader:({params})=> fetch(`https://job-box-server-chi.vercel.app/jobs/bid/${params.id}`)
+            },
+            {
+                path:"/update/:id",
+                element:<PrivetRout><JobeUpdate></JobeUpdate></PrivetRout>,
+                loader:({params})=>fetch(`https://job-box-server-chi.vercel.app/update/${params.id}`)
             }
         ]
       }

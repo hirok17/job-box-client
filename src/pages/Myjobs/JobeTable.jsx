@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 const JobeTable = ({ job, hendelDelete }) => {
     const {_id, title, featured_img, minimum, maximum, deadline, location, experience, category, postDate} = job;
@@ -34,7 +35,8 @@ const JobeTable = ({ job, hendelDelete }) => {
             <td>{postDate}</td>
             <td>{deadline}</td>
             <th>
-                <button className="btn text-white bg-[#007456] hover:bg-[#FF3811]">Update</button>
+                <Link to={`/update/${_id}`}> <button className="btn text-white bg-[#007456] hover:bg-[#FF3811]">Update</button></Link>
+               
             </th>
         </tr>
     );
