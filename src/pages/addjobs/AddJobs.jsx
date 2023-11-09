@@ -27,7 +27,7 @@ const AddJobs = () => {
         const jobData={email, title, category, location, minimum, maximum, experience, postDate, deadline, featured_img, Cover_img, description};
         console.log(jobData);
 
-        axios.post('http://localhost:5000/jobs', jobData)
+        axios.post('https://job-box-server-chi.vercel.app/jobs', jobData)
         .then(res=>{
             console.log(res.data);
             if(res.data.insertedId){

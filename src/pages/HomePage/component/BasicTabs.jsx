@@ -50,21 +50,21 @@ export default function BasicTabs() {
     setValue(newValue);
   };
   React.useEffect(()=>{
-    axios.get('http://localhost:5000/category')
+    axios.get('https://job-box-server-chi.vercel.app/category')
     .then(res=>{
       console.log(res.data);
       setCategoris(res.data);
     })
   },[])
     useEffect(()=>{
-      axios.get('http://localhost:5000/jobs')
+      axios.get('https://job-box-server-chi.vercel.app/jobs')
       .then(res=>{
         const filterData=res.data.filter(info=>info.category =='web-development');
         setJobs(filterData);
       })
     },[])
   const handelCategory=(category)=>{
-    axios.get(`http://localhost:5000/jobs/${category}`)
+    axios.get(`https://job-box-server-chi.vercel.app/jobs/${category}`)
     .then(res=>{
       setJobs(res.data);
       console.log(res.data);

@@ -59,7 +59,7 @@ const router =createBrowserRouter([
             {
                 path:"/jobs/bid/:id",
                 element:<Details></Details>,
-                loader:({params})=> fetch(`http://localhost:5000/jobs/bid/${params.id}`)
+                loader:({params})=> fetch(`https://job-box-server-chi.vercel.app/jobs/bid/${params.id}`)
             }
         ]
       }
